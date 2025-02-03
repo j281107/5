@@ -1,0 +1,55 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+    setlocale(LC_ALL, "Russian"); srand(time(NULL));
+
+    // Размер массива (кол-во элементов sizeMatrix * sizeMatrix)
+    const int sizeMatrix = 4; // const int row = 4, col = 3;
+
+    //        (кол-во стр)(кол-во кол)
+    int matrix[sizeMatrix][sizeMatrix];
+
+    // Внешний цикл отвечает за строки матрицы
+    for (int i = 0; i < sizeMatrix; i++)
+    {
+        // Внутренний цикл отвечет за столбцы матрицы
+        for (int j = 0; j < sizeMatrix; j++)
+        {
+            matrix[i][j] = rand() % 10;
+        }
+    }
+    
+    for (int i = 0; i < sizeMatrix; i++)
+    {
+        for (int j = 0; j < sizeMatrix; j++)
+        {
+            cout << matrix[i][j] << ' ';
+        }
+        cout << endl;
+    }
+    
+    // Переменная для хранения суммы элементов
+    int sum = 0, 
+        maxNum = matrix[0][0], 
+        minNum = matrix[0][0],
+        countZero = 0;
+
+    for (int i = 0; i < sizeMatrix; i++)
+    {
+        for (int j = 0; j < sizeMatrix; j++)
+        {
+            sum += matrix[i][j];
+            if (matrix[i][j] > maxNum) maxNum = matrix[i][j];
+            if (matrix[i][j] < minNum) minNum = matrix[i][j];
+            if (matrix[i][j] == 0) ++countZero;
+        }
+    }
+    double avg = (double)sum / (sizeMatrix * sizeMatrix);
+
+
+
+    return 0;
+}
