@@ -1,55 +1,118 @@
-#include<iostream>
-
+1.
+#include <iostream>
 using namespace std;
-
 int main()
 {
-    setlocale(LC_ALL, "Russian"); srand(time(NULL));
+  setlocale(LC_ALL, "Russian"); srand(time(NULL));
+  const int sizeMatrix = 4; 
+  int matrix[sizeMatrix][sizeMatrix];
 
-    // Размер массива (кол-во элементов sizeMatrix * sizeMatrix)
-    const int sizeMatrix = 4; // const int row = 4, col = 3;
-
-    //        (кол-во стр)(кол-во кол)
-    int matrix[sizeMatrix][sizeMatrix];
-
-    // Внешний цикл отвечает за строки матрицы
-    for (int i = 0; i < sizeMatrix; i++)
-    {
-        // Внутренний цикл отвечет за столбцы матрицы
-        for (int j = 0; j < sizeMatrix; j++)
+   for (int i = 0; i < sizeMatrix; i++)
         {
-            matrix[i][j] = rand() % 10;
+            for (int j = 0; j < sizeMatrix; j++)
+            {
+                matrix[i][j] = rand() % 10;
+            }
         }
-    }
-    
-    for (int i = 0; i < sizeMatrix; i++)
-    {
-        for (int j = 0; j < sizeMatrix; j++)
+
+        for (int i = 0; i < sizeMatrix; i++)
         {
-            cout << matrix[i][j] << ' ';
+            for (int j = 0; j < sizeMatrix; j++)
+            {
+                cout << matrix[i][j] << ' ';
+            }
+            cout << endl;
         }
-        cout << endl;
-    }
-    
-    // Переменная для хранения суммы элементов
-    int sum = 0, 
-        maxNum = matrix[0][0], 
-        minNum = matrix[0][0],
-        countZero = 0;
 
-    for (int i = 0; i < sizeMatrix; i++)
-    {
-        for (int j = 0; j < sizeMatrix; j++)
+       
+        int sum = 0,
+            maxNum = matrix[0][0],
+            minNum = matrix[0][0],
+            countZero = 0;
+
+        for (int i = 0; i < sizeMatrix; i++)
         {
-            sum += matrix[i][j];
-            if (matrix[i][j] > maxNum) maxNum = matrix[i][j];
-            if (matrix[i][j] < minNum) minNum = matrix[i][j];
-            if (matrix[i][j] == 0) ++countZero;
+            for (int j = 0; j < sizeMatrix; j++)
+            {
+                sum += matrix[i][j];
+                if (matrix[i][j] > maxNum) maxNum = matrix[i][j];
+                if (matrix[i][j] < minNum) minNum = matrix[i][j];
+                if (matrix[i][j] == 0) ++countZero;
+            }
         }
-    }
-    double avg = (double)sum / (sizeMatrix * sizeMatrix);
+        double avg = (double)sum / (sizeMatrix * sizeMatrix);
 
 
 
-    return 0;
+        return 0;
+   
 }
+
+2.
+#include <iostream>
+using namespace std;
+  int main()
+  {
+
+      setlocale(LC_ALL, "Russian");
+      const int n = 10;
+      int A[n][n];
+      for (int i = 0; i < n; i++)
+          for (int j = 0; j < n; j++)
+              cin >> A[i][j];
+      int sum = 0;
+      for (int k = 0; k < n; k++)
+          sum += A[k][k];
+      cout << "Сумма элементов главной диагонали sum = " << sum << endl;
+      return 0;
+  }
+
+
+3.
+#include <iostream>
+using namespace std;
+  int main()
+  {
+
+      setlocale(LC_ALL, "Russian");
+      const int N = 6;
+      int A[N][N], k;
+      cout << "Введите матрицу:" << endl;
+      for (int i = 0; i < N; i++)
+      {
+          for (int j = 0; j < N; j++)
+          {
+              cin >> A[i][j];
+          }
+      }
+      k = 0;
+      for (int j = 0; j < N - 1; j++)
+      {
+          for (int i = j + 1; i < N; i++)
+          {
+              if (A[i][j] == A[j][i])
+              {
+                  k++;
+              }
+          }
+      }
+      if (k == (pow(N, 2) - N) / 2)
+      {
+          cout << "Да, симметрична!" << endl;
+          for (int i = 0; i < N; i++)
+          {
+              A[i][i] = 0;
+              for (int j = 0; j < N; j++)
+              {
+                  cout << A[i][j] << " ";
+              }
+              cout << endl;
+          }
+      }
+      else
+      {
+          cout << "Нет, не симметрична!" << endl;
+      }
+      
+      return 0;
+  }
